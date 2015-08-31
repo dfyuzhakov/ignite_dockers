@@ -3,4 +3,6 @@
         ServerName ignite2-test6.dealerfire.com
         ServerAlias www.ignite2-test6.dealerfire.com
         ServerAdmin webmaster@ignite2-test6.dealerfire.com
+
+        Redirect / https://ignite2-test6.dealerfire.com/
 </VirtualHost>
