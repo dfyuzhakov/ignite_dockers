@@ -77,7 +77,7 @@ ADD settings/apache2.conf /etc/apache2/apache2.conf
 ADD settings/sites-enabled /etc/apache2/sites-enabled
 
 ## Configure supervisor
-#ADD settings/supervisord.conf /etc/supervisord.conf
+ADD settings/supervisord.conf /etc/supervisord.conf
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Configure log folders

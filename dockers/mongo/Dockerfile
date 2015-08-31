@@ -24,7 +24,7 @@ RUN apt-get install -y python-setuptools inotify-tools \
 #-----------------------------------------------------------------------------------------------------------------------
 
 ## Configure supervisor
-#ADD settings/supervisord.conf /etc/supervisord.conf
+ADD settings/supervisord.conf /etc/supervisord.conf
 
 # Define mountable directories.
 VOLUME ["/data/db"]
