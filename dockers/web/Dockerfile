@@ -5,6 +5,8 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 #-----------------------------------------------------------------------------------------------------------------------
 # Add repositories. Update and upgrade system.
 #-----------------------------------------------------------------------------------------------------------------------
+RUN apt-get update
+RUN apt-get install -y software-properties-common
 
 ## Update repositories
 RUN apt-get update && apt-get upgrade -y
