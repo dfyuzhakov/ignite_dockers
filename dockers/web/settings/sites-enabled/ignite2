@@ -4,5 +4,7 @@
         ServerAlias www.ignite2-test6.dealerfire.com
         ServerAdmin webmaster@ignite2-test6.dealerfire.com
 
-        Redirect / https://ignite2-test6.dealerfire.com/
+        RewriteEngine on
+        RewriteCond %{HTTPS} !=on
+        RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
 </VirtualHost>
