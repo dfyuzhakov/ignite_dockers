@@ -65,6 +65,11 @@ RUN curl -L -O https://github.com/phpbrew/phpbrew/raw/master/phpbrew && \
     RUN php -r 'readfile("https://getcomposer.org/installer");' | php -- --install-dir=/usr/bin --filename=composer && \
             chmod +x /usr/bin/composer
 
+## Install nodejs
+RUN curl -sL https://deb.nodesource.com/setup | sudo bash -
+RUN apt-get install -y nodejs build-essential
+RUN npm install ember-cli -g
+
 #-----------------------------------------------------------------------------------------------------------------------
 # Configurations
 #-----------------------------------------------------------------------------------------------------------------------
