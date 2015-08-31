@@ -4,6 +4,15 @@ selenium:
     ports:
         - 4444:4444
 
+mongo:
+  build: dockers/mongo
+  hostname: mongo
+  volumes:
+    - "/var/lib/mongodb:/var/lib/mongodb"
+  ports:
+    - 27017:27017
+    - 28017:28017
+
 web:
   build: dockers/web
   hostname: web
@@ -17,5 +26,6 @@ web:
     - 443:443
   links:
     - selenium:selenium
+    - mongo:mongo
   stdin_open: true
   tty: true

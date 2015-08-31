@@ -1,5 +1,10 @@
-# Pull base image.
-FROM dockerfile/ubuntu
+# Base image
+FROM ubuntu:14.04
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Installations
+#-----------------------------------------------------------------------------------------------------------------------
 
 # Install MongoDB.
 RUN \
@@ -9,14 +14,32 @@ RUN \
   apt-get install -y mongodb-org=2.6.9 && \
   rm -rf /var/lib/apt/lists/*
 
+## Install supervisor
+RUN apt-get install -y python-setuptools inotify-tools \
+    && easy_install supervisor
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Configuration
+#-----------------------------------------------------------------------------------------------------------------------
+
+## Configure supervisor
+#ADD settings/supervisord.conf /etc/supervisord.conf
+
 # Define mountable directories.
 VOLUME ["/data/db"]
 
 # Define working directory.
 WORKDIR /data
 
+#-----------------------------------------------------------------------------------------------------------------------
+# Configure log folders
+#-----------------------------------------------------------------------------------------------------------------------
+
+RUN mkdir -p /data/db
+RUN mkdir -p -p /var/log/supervisor
+
 # Define default command.
-CMD ["mongod"]
+CMD ["supervisord", "-c", "/etc/supervisord.conf"]
 
 # Expose ports.
 #   - 27017: process
