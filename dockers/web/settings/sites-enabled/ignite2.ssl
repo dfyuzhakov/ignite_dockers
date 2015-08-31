@@ -1,0 +1,39 @@
+<VirtualHost *:443>
+	SSLEngine On
+	SSLProtocol -all +SSLv3 +TLSv1
+	SSLCipherSuite ALL:!ADH:RC4+RSA:+HIGH:+MEDIUM:!LOW:!SSLv2:!EXP
+	SSLCertificateFile /etc/ssl/certs/dealerfire.com.crt
+	SSLCertificateKeyFile /etc/ssl/private/dealerfire.com.key
+	SSLCertificateChainFile /etc/ssl/certs/gd_bundle.crt
+	DocumentRoot /var/www/ignite2
+	ServerName ignite2-test6.dealerfire.com
+	ServerAlias www.ignite2-test6.dealerfire.com
+	ServerAdmin webmaster@ignite2-test6.dealerfire.com
+	<Directory /var/www/ignite2>
+        Options Includes FollowSymLinks
+        AllowOverride All
+	</Directory>
+	<Directory />
+		AllowOverride All
+		SetEnvIf Remote_Addr "127\.0\.0\.1" SWF_UPLOADER
+		SetEnvIf X-Real-IP "217\.29\.117\.16" SWF_UPLOADER
+		SetEnvIf X-Real-IP "172\.16\.10\.\d+" SWF_UPLOADER
+		SetEnvIf X-Real-IP "80\.80\.222\.83" SWF_UPLOADER
+		SetEnvIf X-Real-IP "209\.103\.219\.14" SWF_UPLOADER
+		SetEnvIf X-Real-IP "209\.103\.219\.198" BUILDER
+		SetEnvIfNoCase User-Agent "Shockwave Flash" SWF_UPLOADER
+		AuthType Basic
+		AuthName "By Invitation Only"
+		AuthUserFile /var/www/.bhtpasswd
+		require valid-user
+		Order allow,deny
+		Allow from env=SWF_UPLOADER
+		Satisfy any
+	</Directory>
+    <IfModule mod_rewrite.c>
+        RewriteEngine On
+        RewriteRule ^/lvmarketing - [F]
+        RewriteRule ^/feed - [F]
+        RewriteRule ^/lotvantage - [F]
+    </IfModule>
+</VirtualHost>
